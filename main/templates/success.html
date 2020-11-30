@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Success!</h2>
+    <form action="/success" method="POST">
+        {% csrf_token %}
+    </form>
+
+    <h3>Welcome, {{logged_in_user.first_name}} {{logged_in_user.last_name}}!</h3>
+    <p>I'm so happy to see you!</p> <a href="/logout">Logout</a>
+
+    <h1>All Jobs</h1>
+    <table>
+        <tbody>
+            <tr>
+                {% for job in all_job %}
+                <td>{{job.id}}</td>
+                <td>{{job.title}}</td>
+                <td>{{job.description}}</td>
+                <td>{{job.location}}</td>
+                <td><a href="/edit_job/{{job.id}}">Edit</a></td>
+                <td><a href="/job_details/{{job.id}}">View Job Details</a></td>
+                <td><a href="/destroy/{{job.id}}">Delete</a></td>
+            </tr>
+        
+            {% endfor %}
+            <a href="create_a_job">Create a New Job</a>
+        </tbody>
+    </table>
+
+    <hr>
+    <h1>{{logged_in_user.first_name}}'s Jobs:</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                {% for job in logged_in_user.jobs.all %}
+                <td>{{job.id}}</td>
+                <td>{{job.title}}</td>
+                <td>{{job.description}}</td>
+                <td>{{job.location}}</td>
+                <td><a href="/edit_job/{{job.id}}">Edit</a></td>
+                <td><a href="/job_details/{{job.id}}">View Job Details</a></td>
+                <td><a href="/destroy/{{job.id}}">Delete</a></td>
+            </tr>
+        
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

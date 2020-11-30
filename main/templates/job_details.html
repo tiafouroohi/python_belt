@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/job_details" method="POST">
+    {% csrf_token %}
+    
+    </form>
+    <h1>Hello, {{logged_in_user.first_name}}! Here are the job details</h1>
+    <input type="hidden" name="job_id" id="{{job.id}}">
+    <h2>Job ID: {{job.id}}
+    <h2>Job Title: {{job.title}}</h2>
+    <h2>Description: {{job.description}}</h2>
+    <h2>Location: {{job.location}}</h2>
+    <h2>Posted by: {{job.submitted_by.first_name}} {{job.submitted_by.last_name}}</h2>
+    <h2>Posted at: {{user.created_at|date:"F dS Y"}}</h2>
+
+    
+    
+    <a href="/success">Back to Home</a>
+</body>
+</html>
